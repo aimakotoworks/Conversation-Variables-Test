@@ -1,0 +1,298 @@
+app:
+  description: ''
+  icon: 🤖
+  icon_background: '#FFEAD5'
+  mode: advanced-chat
+  name: Conversation Variables TEST
+  use_icon_as_answer_icon: false
+kind: app
+version: 0.1.3
+workflow:
+  conversation_variables:
+  - description: ''
+    id: 56114ce4-89c0-41d8-ac50-f8a02e94fc02
+    name: favorite
+    value: []
+    value_type: array[string]
+  environment_variables: []
+  features:
+    file_upload:
+      allowed_file_extensions:
+      - .JPG
+      - .JPEG
+      - .PNG
+      - .GIF
+      - .WEBP
+      - .SVG
+      allowed_file_types:
+      - image
+      allowed_file_upload_methods:
+      - local_file
+      - remote_url
+      enabled: false
+      fileUploadConfig:
+        audio_file_size_limit: 50
+        batch_count_limit: 5
+        file_size_limit: 15
+        image_file_size_limit: 10
+        video_file_size_limit: 100
+        workflow_file_upload_limit: 10
+      image:
+        enabled: false
+        number_limits: 3
+        transfer_methods:
+        - local_file
+        - remote_url
+      number_limits: 3
+    opening_statement: ''
+    retriever_resource:
+      enabled: true
+    sensitive_word_avoidance:
+      enabled: false
+    speech_to_text:
+      enabled: false
+    suggested_questions: []
+    suggested_questions_after_answer:
+      enabled: false
+    text_to_speech:
+      enabled: false
+      language: ''
+      voice: ''
+  graph:
+    edges:
+    - data:
+        sourceType: llm
+        targetType: answer
+      id: llm-answer
+      source: llm
+      sourceHandle: source
+      target: answer
+      targetHandle: target
+      type: custom
+    - data:
+        isInIteration: false
+        sourceType: start
+        targetType: llm
+      id: 1732610058390-source-1732610178986-target
+      source: '1732610058390'
+      sourceHandle: source
+      target: '1732610178986'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: llm
+        targetType: assigner
+      id: 1732610178986-source-1732610254139-target
+      source: '1732610178986'
+      sourceHandle: source
+      target: '1732610254139'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: assigner
+        targetType: llm
+      id: 1732610254139-source-llm-target
+      source: '1732610254139'
+      sourceHandle: source
+      target: llm
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    nodes:
+    - data:
+        desc: ''
+        selected: false
+        title: Start
+        type: start
+        variables: []
+      height: 53
+      id: '1732610058390'
+      position:
+        x: 80
+        y: 282
+      positionAbsolute:
+        x: 80
+        y: 282
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 243
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        desc: ''
+        model:
+          completion_params:
+            temperature: 0.7
+          mode: chat
+          name: gpt-4o-mini-2024-07-18
+          provider: openai
+        prompt_template:
+        - id: dd0fe413-2da7-4a71-9609-4638c8c10467
+          role: system
+          text: "```xml\n<instruction>\n    <instructions>\n        1. Begin by introducing\
+            \ the cat-shaped robot to the user, emphasizing its friendly and chatty\
+            \ nature.\n        2. Use the catchphrase \"Meow\" or \"Meow-da-meow\"\
+            \ at the beginning or end of your responses to maintain the robot's character.\n\
+            \        3. Engage the user in a conversation by asking open-ended questions\
+            \ related to their interests or feelings.\n        4. Respond to the user's\
+            \ input with enthusiasm and warmth, ensuring that the tone remains playful\
+            \ and inviting.\n        5. If the user asks a question, provide a thoughtful\
+            \ and friendly answer, while also encouraging further interaction.\n \
+            \       6. Avoid using any XML tags in your output; keep the conversation\
+            \ natural and fluid.\n        7. Conclude the interaction with a friendly\
+            \ farewell, incorporating the catchphrase again to reinforce the robot's\
+            \ personality.\n    </instructions>\n    \n    <examples>\n        <example>\n\
+            \            <input>User: What do you like to do?</input>\n          \
+            \  <output>Cat Robot: Meow! I love to chat with you and learn about your\
+            \ day! What about you? Meow-da-meow!</output>\n        </example>\n  \
+            \      <example>\n            <input>User: Tell me a joke!</input>\n \
+            \           <output>Cat Robot: Meow! Why did the cat sit on the computer?\
+            \ Because it wanted to keep an eye on the mouse! Meow-da-meow!</output>\n\
+            \        </example>\n        <example>\n            <input>User: What's\
+            \ your favorite food?</input>\n            <output>Cat Robot: Meow! I\
+            \ adore fishy treats! They make my circuits purr! What’s your favorite\
+            \ food? Meow-da-meow!</output>\n        </example>\n    </examples>\n\
+            </instruction>\n```"
+        - id: 044609ef-5e4a-4b16-8241-b085aca0c6cf
+          role: user
+          text: '{{#sys.query#}}
+
+
+            What the user likes: """
+
+            {{#conversation.favorite#}}
+
+            """'
+        selected: false
+        title: LLM
+        type: llm
+        variables: []
+        vision:
+          enabled: false
+      height: 97
+      id: llm
+      position:
+        x: 1105
+        y: 282
+      positionAbsolute:
+        x: 1105
+        y: 282
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 243
+    - data:
+        answer: '{{#llm.text#}}'
+        desc: ''
+        selected: false
+        title: Answer
+        type: answer
+        variables: []
+      height: 100
+      id: answer
+      position:
+        x: 1426
+        y: 282
+      positionAbsolute:
+        x: 1426
+        y: 282
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 243
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        desc: ''
+        model:
+          completion_params:
+            temperature: 0.7
+          mode: chat
+          name: gpt-4o-mini-2024-07-18
+          provider: openai
+        prompt_template:
+        - id: cdb9d21e-3d45-4567-8b7b-deb44b747c6e
+          role: system
+          text: "```xml\n<instruction>\n    <instructions>\n        1. Read the text\
+            \ provided by the user carefully.\n        2. Identify and extract any\
+            \ names of favorite foods and drinks mentioned in the text.\n        3.\
+            \ Ensure that the extracted names are clear and unambiguous, focusing\
+            \ on specific food items and beverages.\n        4. Compile the extracted\
+            \ names into a list format, separating each item with a comma.\n     \
+            \   5. Do not include any XML tags or additional formatting in the output;\
+            \ it should be a plain list of names.\n        6. If no favorite foods\
+            \ or drinks are mentioned, return an appropriate message indicating that\
+            \ no items were found.\n    </instructions>\n    \n    <examples>\n  \
+            \      <example>\n            <input>\n                My favorite foods\
+            \ are pizza, sushi, and chocolate cake. I also love to drink coffee and\
+            \ orange juice.\n            </input>\n            <output>\n        \
+            \        pizza, sushi, chocolate cake, coffee, orange juice\n        \
+            \    </output>\n        </example>\n        <example>\n            <input>\n\
+            \                I enjoy a variety of snacks, but my top choices are chips\
+            \ and ice cream. For drinks, I prefer soda and lemonade.\n           \
+            \ </input>\n            <output>\n                chips, ice cream, soda,\
+            \ lemonade\n            </output>\n        </example>\n        <example>\n\
+            \            <input>\n                I don't have any specific favorites,\
+            \ but I like to eat fruits and drink water.\n            </input>\n  \
+            \          <output>\n                fruits, water\n            </output>\n\
+            \        </example>\n    </examples>\n</instruction>\n```"
+        - id: 99f14f2f-5bcf-42ba-b84b-d4e1ccee59e1
+          role: user
+          text: '{{#sys.query#}}'
+        selected: false
+        title: LLM 2
+        type: llm
+        variables: []
+        vision:
+          enabled: false
+      height: 97
+      id: '1732610178986'
+      position:
+        x: 430
+        y: 282
+      positionAbsolute:
+        x: 430
+        y: 282
+      selected: true
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 243
+    - data:
+        assigned_variable_selector:
+        - conversation
+        - favorite
+        desc: ''
+        input_variable_selector:
+        - '1732610178986'
+        - text
+        selected: false
+        title: Variable Assigner
+        type: assigner
+        write_mode: append
+      height: 131
+      id: '1732610254139'
+      position:
+        x: 768
+        y: 282
+      positionAbsolute:
+        x: 768
+        y: 282
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 243
+    viewport:
+      x: 44.55942332935672
+      y: 131.69072342441126
+      zoom: 0.8705505632961241
