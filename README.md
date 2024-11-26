@@ -19,9 +19,9 @@ Below is an image illustrating the structure of this ChatFlow:
    git clone https://github.com/aimakotoworks/Conversation-Variables-Test.git
    ```
    
-2.Import the ChatFlow into your Dify environment.
+2. Import the ChatFlow into your Dify environment.
 
-3.Customize and test conversation variables according to your requirements.
+3. Customize and test conversation variables according to your requirements.
 
 ## Resources
 
