@@ -18,8 +18,11 @@ Below is an image illustrating the structure of this ChatFlow:
    ```bash
    git clone https://github.com/aimakotoworks/Conversation-Variables-Test.git
    ```
+   
 2.Import the ChatFlow into your Dify environment.
+
 3.Customize and test conversation variables according to your requirements.
+
 ## Resources
 
 - [Enhancing LLM Memory with Conversation Variables and Variable Assigners](https://dify.ai/blog/enhancing-llm-memory-with-conversation-variables-and-variable-assigners)
